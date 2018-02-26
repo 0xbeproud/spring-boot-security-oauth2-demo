@@ -1,7 +1,9 @@
 1. /oauth/token
 
-curl foo1:bar1@localhost:8181/oauth/token -d grant_type=password -d client_id=foo1 -d scope=read -d username=user -d password=pass
-curl app:app@localhost:8181/oauth/token -d grant_type=password -d client_id=app -d scope=read -d username=user -d password=pass
+```bash
+curl -u app1:app1 localhost:8181/oauth/token -d grant_type=password -d client_id=app1 -d scope=read -d username=user -d password=pass
+```
+
 
 ```json
 {
@@ -17,7 +19,21 @@ curl app:app@localhost:8181/oauth/token -d grant_type=password -d client_id=app 
 
 2. /oauth/check_token
 
-curl -X POST 'http://localhost:8181/oauth/check_token' -d 'token=67f80e86-b26c-4ccb-bf62-745c30eae07c'
+참고
+
+```
+#AuthorizationSerConfig
+ 
+    @Override
+    public void configure(final AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.checkTokenAccess("isAuthenticated()"); <-- permitAll()로 변경해야 한다. 
+    }
+```
+
+
+curl -X POST 'http://localhost:8181/oauth/check_token' -d 'token=9c55b01b-7aae-4636-8207-0cacf5835034'
+
+
 
 ```json
 {
@@ -37,6 +53,6 @@ curl -X POST 'http://localhost:8181/oauth/check_token' -d 'token=67f80e86-b26c-4
 
 3. /members
 
-curl -v -H "Authorization: Bearer 2e0d006e-bdb9-4def-be27-1c13c2383ab3" "http://localhost:8080/members"
+curl -v -H "Authorization: Bearer 9c55b01b-7aae-4636-8207-0cacf5835034" "http://localhost:8080/members"
 
 

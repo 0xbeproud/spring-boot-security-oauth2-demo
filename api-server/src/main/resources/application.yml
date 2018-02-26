@@ -23,8 +23,8 @@ spring:
 security:
   oauth2:
     client:
-      client-id: foo
-      client-secret: bar
+      client-id: app1
+      client-secret: app1
     resource:
       token-info-uri: http://localhost:8181/oauth/check_token
 
