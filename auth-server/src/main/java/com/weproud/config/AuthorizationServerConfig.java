@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -35,13 +36,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
     private DataSource dataSource;
 
     // spring boot에 의해 생성되며, "user"라는 이름으로, "password"라는 패스워드와 함께 싱글 유저를 가집니다.
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+    @Autowired // oauth_client_details관련 service
     private ClientDetailsService clientDetailsService;
 
     @Override
@@ -52,7 +56,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //                .pathMapping("/oauth/check_token", "/oauth/check_token")
 //                .pathMapping("/oauth/token_key", "/oauth/token_key")
 //                .pathMapping("/oauth/authorize", "/oauth/authorize")
-                .tokenStore(this.tokenStore());
+                .tokenStore(this.tokenStore())
+                .userDetailsService(this.userDetailsService);
     }
 
     @Override

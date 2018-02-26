@@ -34,9 +34,5 @@ logging:
     org.springframework:
       security: debug
 
-security:
-  user:
-    name: user
-    password: pass
 
 
