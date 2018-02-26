@@ -1,6 +1,9 @@
+server:
+  port: 8181
+
 spring:
   application:
-    name: spring-boot-security-oauth2-demo
+    name: auth-server
   jpa:
     database: mysql
     generate-ddl: false
@@ -27,14 +30,19 @@ logging:
       connection: 'off'
       resultset: 'off'
       resultsettable: 'off'
-      sqlonly: 'off'
-    org.springframework.security: debug
+      sqlonly: info
+    org.springframework:
+      security: debug
 
 security:
   user:
     name: user
     password: pass
   oauth2:
+    authorization:
+      check-token-access: permitAll()
     client:
-      client-id: foo
-      client-secret: bar
+      client-id: foo1
+      client-secret: bar1
+
+

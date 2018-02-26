@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: api-server
+
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://localhost:8181/oauth/check_token
+
+logging:
+  level:
+    jdbc:
+      sqltiming: 'off'
+      audit: 'off'
+      connection: 'off'
+      resultset: 'off'
+      resultsettable: 'off'
+      sqlonly: 'off'
+    org.springframework:
+      web: debug
+      security: debug
