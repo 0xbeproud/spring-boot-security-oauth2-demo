@@ -44,14 +44,19 @@ create table oauth_code (
 
 
 INSERT INTO `oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `autoapprove`)
-VALUES ('app1', 'oauth2-resource', 'app1', 'read', 'authorization_code,password,refresh_token,implicit', null, 'ROLE_CLIENT, ROLE_TRUSTED_CLIENT', 900, null, '{}', null);
+VALUES ('app1', 'oauth2-resource', '$2a$10$dxuwGjnLjYM3HBL5UjYQ9.ar8rOBJDScbHzzwPrAW1wzUiyDWWx1O', 'read', 'authorization_code,password,refresh_token,implicit', null, 'ROLE_CLIENT, ROLE_TRUSTED_CLIENT', 900, null, '{}', null);
 
 INSERT INTO `oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `autoapprove`)
-VALUES ('app2', 'oauth2-resource', 'app2', 'read', 'authorization_code,password,refresh_token,implicit', null, 'ROLE_CLIENT, ROLE_TRUSTED_CLIENT', 900, null, '{}', null);
+VALUES ('app2', 'oauth2-resource', '$2a$10$YTe3FyiJC2oqXz8l2n52iuc5juULH91ivFasLJqcgfI0cUt6Js7u2', 'read', 'authorization_code,password,refresh_token,implicit', null, 'ROLE_CLIENT, ROLE_TRUSTED_CLIENT', 900, null, '{}', null);
 
 
 CREATE TABLE `member` (
   `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(150) NOT NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`)
+);
+
+
+INSERT INTO `member` (`username`, `password`) VALUES ('member1', '$2a$10$0Bpq4Nwm2zxj9x5ppWZxmuX92cF7f10uT6TNRUumRvvLAuvWL2B4i');
+INSERT INTO `member` (`username`, `password`) VALUES ('member2', '$2a$10$lqseWhdABGjy56Rx6cv3d.oSoP0dYGyjnKP/glLAbn2AyWfDiL8Wi');
