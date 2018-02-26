@@ -42,7 +42,7 @@ security:
     authorization:
       check-token-access: permitAll()
     client:
-      client-id: foo1
-      client-secret: bar1
+      client-id: foo
+      client-secret: bar
 
 
