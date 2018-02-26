@@ -15,12 +15,10 @@ public class Member {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
     private String username;
     private String password;
 
-    public Member(final String name, final String username, final String password) {
-        this.name = name;
+    public Member(final String username, final String password) {
         this.username = username;
         this.password = password;
     }
