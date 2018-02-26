@@ -38,11 +38,5 @@ security:
   user:
     name: user
     password: pass
-  oauth2:
-    authorization:
-      check-token-access: permitAll()
-    client:
-      client-id: foo
-      client-secret: bar
 
 

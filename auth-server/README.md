@@ -1,6 +1,7 @@
 1. /oauth/token
 
 curl foo1:bar1@localhost:8181/oauth/token -d grant_type=password -d client_id=foo1 -d scope=read -d username=user -d password=pass
+curl app:app@localhost:8181/oauth/token -d grant_type=password -d client_id=app -d scope=read -d username=user -d password=pass
 
 ```json
 {
@@ -16,7 +17,7 @@ curl foo1:bar1@localhost:8181/oauth/token -d grant_type=password -d client_id=fo
 
 2. /oauth/check_token
 
-curl -X POST 'http://localhost:8181/oauth/check_token' -d 'token=0dd31869-5c41-44af-9635-dda99066fb57'
+curl -X POST 'http://localhost:8181/oauth/check_token' -d 'token=67f80e86-b26c-4ccb-bf62-745c30eae07c'
 
 ```json
 {
