@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Logan. 81k
  */
 @RestController
-@RequestMapping("/members")
-public class MemberController {
+@RequestMapping("/login")
+public class LoginController {
     @RequestMapping
-    public String getMembersAll(){
-        return "members list";
+    public String login(){
+        return "no need auth";
     }
 }

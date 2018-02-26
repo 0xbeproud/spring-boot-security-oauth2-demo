@@ -17,11 +17,11 @@ public class Member {
     private Long id;
     private String name;
     private String username;
-    private String remark;
+    private String password;
 
-    public Member(final String name, final String username, final String remark) {
+    public Member(final String name, final String username, final String password) {
         this.name = name;
         this.username = username;
-        this.remark = remark;
+        this.password = password;
     }
 }
