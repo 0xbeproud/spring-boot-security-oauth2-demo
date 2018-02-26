@@ -1,6 +1,10 @@
 1. /oauth/token
 
 ```bash
+
+curl {security.oauth2.client.client-id}:{security.oauth2.client.client-secret}@주소/oauth/token -d grant_type=password -d client_id={security.oauth2.client.client-id} -d scope=read -d username={security.user.name} -d password={security.user.password}
+
+
 curl -u app1:app1 localhost:8181/oauth/token -d grant_type=password -d client_id=app1 -d scope=read -d username=user -d password=pass
 ```
 
@@ -53,6 +57,6 @@ curl -X POST 'http://localhost:8181/oauth/check_token' -d 'token=9c55b01b-7aae-4
 
 3. /members
 
-curl -v -H "Authorization: Bearer 9c55b01b-7aae-4636-8207-0cacf5835034" "http://localhost:8080/members"
+curl -v -H "Authorization: Bearer 8c691e03-4c7d-434d-9c1f-522b4299979b" "http://localhost:8080/members"
 
 
