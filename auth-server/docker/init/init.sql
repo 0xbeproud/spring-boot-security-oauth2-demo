@@ -42,6 +42,14 @@ create table oauth_code (
   code VARCHAR(255), authentication BLOB
 );
 
+create table oauth_approvals (
+	userId VARCHAR(256),
+	clientId VARCHAR(256),
+	scope VARCHAR(256),
+	status VARCHAR(10),
+	expiresAt TIMESTAMP,
+	lastModifiedAt TIMESTAMP
+);
 
 INSERT INTO `oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `autoapprove`)
 VALUES ('app1', 'oauth2-resource', '$2a$10$dxuwGjnLjYM3HBL5UjYQ9.ar8rOBJDScbHzzwPrAW1wzUiyDWWx1O', 'read', 'authorization_code,password,refresh_token,implicit', null, 'ROLE_CLIENT, ROLE_TRUSTED_CLIENT', 900, null, '{}', null);
