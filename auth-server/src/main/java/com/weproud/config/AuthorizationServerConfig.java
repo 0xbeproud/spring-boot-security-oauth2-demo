@@ -75,7 +75,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(final AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.passwordEncoder(this.passwordEncoder).checkTokenAccess("isAuthenticated()");
+        security.passwordEncoder(this.passwordEncoder)
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()");
     }
 
     // api의 요청 클라이어트 정보를 설정할 수 있다.

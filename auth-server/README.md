@@ -25,8 +25,8 @@ curl -u app1:app1 localhost:8181/oauth/token \
     -d grant_type=password \
     -d client_id=app1 \
     -d scope=read \
-    -d username=user \
-    -d password=pass
+    -d username=member1 \
+    -d password=member1
 ```
 
 response
@@ -74,6 +74,6 @@ response
 
 3. /members
 
-curl -v -H "Authorization: Bearer 8c691e03-4c7d-434d-9c1f-522b4299979b" "http://localhost:8080/members"
+curl -v -H "Authorization: Bearer ca88d592-741a-4072-8a05-2656e47686ac" "http://localhost:8080/members"
 
 
