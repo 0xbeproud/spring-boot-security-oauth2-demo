@@ -104,20 +104,57 @@ scope: 해당 클라이언트로 발급될 액세스 토큰의 권한 범위, �
 
 
 
+### RSA
+
+ssh-keygen -t rsa -b 4096 -C "auth-key" -f auth-key
+
 ### server.jks 만들기 
 
 https://github.com/yookeun/springboot-jwt-example
 
 ```
 key 만들기
-keytool -genkeypair -alias auth -keyalg RSA -dname "CN=Web Server,OU=Unit,O=Organization,L=City,S=State,C=US" -keypass passone -keystore server.jks -storepass passtwo
+keytool -genkeypair -alias jwt -keyalg RSA -dname "CN=Api Server,OU=Unit,O=Organization,L=City,S=State,C=US" -keypass password -keystore jwt.jks -storepass password
+keytool -list -rfc --keystore jwt.jks | openssl x509 -inform pem -pubkey
+
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqVO5vnTQCiR5cYrsLjZh
+XIPPty+8A6R9gD/7naYSHj7i/sctTI57qIOO+kysgeyU7DKmImdvi+LMAqRl/KPD
+LLvk6H12ChJYaX42qfPaU8OuyvKf5cat7JG3yoQfFVo3+1nuLrN5Z/wi42feCmSk
+WBH1he49rCTQuth8Rxuwo6j9fm7ZTzMtk9KU/z0qAY9gfi/Mr6MJMolMyviwxOiV
+7kGa7GcWHi85gycZs9TfgZvZCz7iB7SkN12BPjel2d670AoEO2gQZLThoMrQSPge
+8ITuea/c2asgKJF70Ur8iEh2grD6N6iJ0eSxQYRcRAZZad95FHnVN939+Vbi6Eg2
+AwIDAQAB
+-----END PUBLIC KEY-----
+-----BEGIN CERTIFICATE-----
+MIIDbTCCAlWgAwIBAgIEfR9F0zANBgkqhkiG9w0BAQsFADBnMQswCQYDVQQGEwJV
+UzEOMAwGA1UECBMFU3RhdGUxDTALBgNVBAcTBENpdHkxFTATBgNVBAoTDE9yZ2Fu
+aXphdGlvbjENMAsGA1UECxMEVW5pdDETMBEGA1UEAxMKQXBpIFNlcnZlcjAeFw0x
+ODAyMjgwODI5MzBaFw0xODA1MjkwODI5MzBaMGcxCzAJBgNVBAYTAlVTMQ4wDAYD
+VQQIEwVTdGF0ZTENMAsGA1UEBxMEQ2l0eTEVMBMGA1UEChMMT3JnYW5pemF0aW9u
+MQ0wCwYDVQQLEwRVbml0MRMwEQYDVQQDEwpBcGkgU2VydmVyMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqVO5vnTQCiR5cYrsLjZhXIPPty+8A6R9gD/7
+naYSHj7i/sctTI57qIOO+kysgeyU7DKmImdvi+LMAqRl/KPDLLvk6H12ChJYaX42
+qfPaU8OuyvKf5cat7JG3yoQfFVo3+1nuLrN5Z/wi42feCmSkWBH1he49rCTQuth8
+Rxuwo6j9fm7ZTzMtk9KU/z0qAY9gfi/Mr6MJMolMyviwxOiV7kGa7GcWHi85gycZ
+s9TfgZvZCz7iB7SkN12BPjel2d670AoEO2gQZLThoMrQSPge8ITuea/c2asgKJF7
+0Ur8iEh2grD6N6iJ0eSxQYRcRAZZad95FHnVN939+Vbi6Eg2AwIDAQABoyEwHzAd
+BgNVHQ4EFgQUpAP17RsMMXc3voTsrvq1kTwERKUwDQYJKoZIhvcNAQELBQADggEB
+AKAfazfsfGCYV7Dm8yoRf4WwxmOmUG1ND7KmAjBEYlWFfJoijDWLhA+Fu4HnC6Yn
+kdL0BlwxAEB1oCzG3/Jy4x/SLwiIz9P+YQywrg3uWXWqfdj1PhBb01YsKis21QG8
+9y/3rX3kNdoMZJ11JkJdudN0A9u4+tDt58VnCFh2anZu9hYo0OSlxcheOmaF+o4H
+1pp4rKg5igfrSVKAEbd7u9aFDUZCzPx6tw0Nvim1QT6G7c6IB4nWGR/lZ/nuzLAt
+CjEJVVAl1js8BdPt/fR/P8p1btl8vBHKRP4O2zESmlC0R56CO3DlgG3YSAMsE1Qm
+T0UW3tpfZJh1I8XwyTwvsVg=
+-----END CERTIFICATE-----
+
 
 인증키 만들기
-keytool -export -keystore server.jks -alias auth -file server.cer
+keytool -export -keystore jwt.jks -alias jwt -file jwt.cer
 
 인증키 내용 보기
-openssl x509 -inform der -in server.cer -pubkey -noout
+openssl x509 -inform der -in jwt.cer -pubkey -noout
 
 server.jks 내용 보기.
-keytool -list -v -alias auth -storepass passtwo -keystore server.jks
+keytool -list -rfc --keystore jwt.jks | openssl x509 -inform pem -pubkey
 ```

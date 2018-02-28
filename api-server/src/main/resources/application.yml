@@ -31,13 +31,13 @@ security:
       jwt:
         key-value:
           -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuD9zZws25+kkWm5AQCa5
-          kEJnc/ptnqMLFXXcx5uTGYcenTeyZaIq16nRmIK6Mmk0rpiY/2FD0yRRIVS6Y2U2
-          WtRpG/isvTkg47LgYSZNTgj5k+DqcpVaUxk1S39lmU9goZHiFundMElZHgkcikKR
-          lINallg6v/0QpVzCztVmWZjOC8zzrPZrPW8FWvZ0p8kNFrYkOoR3ikgWHFjy2vDI
-          mJruHqbWqU01YKCHnOYh/YCjfppih9yZRmshWTmwi+8uJeRTcqAPny1smT/InH2a
-          NupmsvX+qjnU6zZnYfL0zGlAXb5cXI6jXZCdCupfJSjeWjdtPzEwlyyxL7LP19wM
-          GQIDAQAB
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqVO5vnTQCiR5cYrsLjZh
+          XIPPty+8A6R9gD/7naYSHj7i/sctTI57qIOO+kysgeyU7DKmImdvi+LMAqRl/KPD
+          LLvk6H12ChJYaX42qfPaU8OuyvKf5cat7JG3yoQfFVo3+1nuLrN5Z/wi42feCmSk
+          WBH1he49rCTQuth8Rxuwo6j9fm7ZTzMtk9KU/z0qAY9gfi/Mr6MJMolMyviwxOiV
+          7kGa7GcWHi85gycZs9TfgZvZCz7iB7SkN12BPjel2d670AoEO2gQZLThoMrQSPge
+          8ITuea/c2asgKJF70Ur8iEh2grD6N6iJ0eSxQYRcRAZZad95FHnVN939+Vbi6Eg2
+          AwIDAQAB
           -----END PUBLIC KEY-----
 
 #        key-uri: http://localhost:8181/oauth/token_key
