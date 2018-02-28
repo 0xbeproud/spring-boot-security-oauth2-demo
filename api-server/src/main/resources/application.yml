@@ -27,8 +27,20 @@ security:
       client-secret: app1
     resource:
       id: oauth2-resource
-      token-info-uri: http://localhost:8181/oauth/check_token
+#      token-info-uri: http://localhost:8181/oauth/check_token
+      jwt:
+        key-value:
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuD9zZws25+kkWm5AQCa5
+          kEJnc/ptnqMLFXXcx5uTGYcenTeyZaIq16nRmIK6Mmk0rpiY/2FD0yRRIVS6Y2U2
+          WtRpG/isvTkg47LgYSZNTgj5k+DqcpVaUxk1S39lmU9goZHiFundMElZHgkcikKR
+          lINallg6v/0QpVzCztVmWZjOC8zzrPZrPW8FWvZ0p8kNFrYkOoR3ikgWHFjy2vDI
+          mJruHqbWqU01YKCHnOYh/YCjfppih9yZRmshWTmwi+8uJeRTcqAPny1smT/InH2a
+          NupmsvX+qjnU6zZnYfL0zGlAXb5cXI6jXZCdCupfJSjeWjdtPzEwlyyxL7LP19wM
+          GQIDAQAB
+          -----END PUBLIC KEY-----
 
+#        key-uri: http://localhost:8181/oauth/token_key
 
 logging:
   level:

@@ -72,8 +72,52 @@ response
 ```
 
 
-3. /members
+# 3. /members
 
 curl -v -H "Authorization: Bearer ca88d592-741a-4072-8a05-2656e47686ac" "http://localhost:8080/members"
 
 
+
+
+### The most important fields from the oauth_client_details we should focus on are:
+
+- client_id – to store the id of newly registered clients
+- client_secret – to store the password of clients
+- access_token_validity – which indicates if client is still valid
+- authorities – to indicate what roles are permitted with particular client
+- scope – allowed actions, for example writing statuses on Facebook etc.
+- authorized_grant_types, which provides information how users can login to the particular client (in our example case it’s a form login with password)
+
+
+
+Access Token Validity: 해당 클라이언트로 발급될 액세스 토큰 유효 시간 (기본값: 12시간)
+(직접 기술:accessTokenValiditySeconds(...), DB: access_token_validity 칼럼 )
+
+Refresh Token Validity: 해당 클라이언트로 발급될 리프 러시 토큰 유효 시간 (기본값: 30일)
+(직접 기술:refreshTokenValiditySeconds(...), DB: refresh_token_validity 칼럼)
+
+authorities: 클라이언트의 권한 부여 ( 클라이언트 인증방식 때 해당 권한을 사용)
+(직접 기술:authorities("...", "...",...) DB: authorities 칼럼, 쉼표로 구분)
+
+scope: 해당 클라이언트로 발급될 액세스 토큰의 권한 범위, 예를 들면 이 클라이언트로 API를 접근하면 특정 API에 대해 접근이 가능 여부 제어를 물을 때 사용된다. scope에 대한 이야기는 앞으로 좀 더 자세히 다룰 예정이다.
+(직접 기술:. scopes("...", "...",...) DB: scope 칼럼, 쉼표로 구분)
+
+
+
+### server.jks 만들기 
+
+https://github.com/yookeun/springboot-jwt-example
+
+```
+key 만들기
+keytool -genkeypair -alias auth -keyalg RSA -dname "CN=Web Server,OU=Unit,O=Organization,L=City,S=State,C=US" -keypass passone -keystore server.jks -storepass passtwo
+
+인증키 만들기
+keytool -export -keystore server.jks -alias auth -file server.cer
+
+인증키 내용 보기
+openssl x509 -inform der -in server.cer -pubkey -noout
+
+server.jks 내용 보기.
+keytool -list -v -alias auth -storepass passtwo -keystore server.jks
+```

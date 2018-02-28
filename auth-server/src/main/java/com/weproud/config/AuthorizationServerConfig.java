@@ -1,9 +1,11 @@
 package com.weproud.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,9 +17,12 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 import javax.sql.DataSource;
+import java.security.KeyPair;
 
 /**
  * @author Logan. 81k
@@ -26,14 +31,18 @@ import javax.sql.DataSource;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-
-    // Spring Security OAuth에서 access_token, refresh_token을 저장하는 토큰 저장소에 대한 모든 CRUD는 TokenStore 인터페이스로 구현하게 되어 있다.
-    // 기본 제공되는 구현체로는 InMemoryTokenStore, JdbcTokenStore, RedisTokenStore 클래스가 제공된다. 인터페이스만 구현하면 되므로 제3의 구현체를 작성해도 된다.
-    //
-    //출처: http://jsonobject.tistory.com/363 [지단로보트의 블로그]
     @Bean
     public TokenStore tokenStore() {
-        return new JdbcTokenStore(this.dataSource);
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource("server.jks"), "passtwo".toCharArray())
+                .getKeyPair("auth", "passone".toCharArray());
+        converter.setKeyPair(keyPair);
+        return converter;
     }
 
     // client_id, client_secret 등을 저장하는 클라이언트 저장소에 대한 모든 CRUD는 ClientDetailsService 인터페이스로 구현하게 되어 있다.
@@ -52,6 +61,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    @Qualifier("dataSource")
     private DataSource dataSource;
 
     // spring boot에 의해 생성되며, "user"라는 이름으로, "password"라는 패스워드와 함께 싱글 유저를 가집니다.
@@ -70,6 +80,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //                .pathMapping("/oauth/token_key", "/oauth/token_key")
 //                .pathMapping("/oauth/authorize", "/oauth/authorize")
                 .tokenStore(this.tokenStore())
+                .accessTokenConverter(this.jwtAccessTokenConverter())
                 .userDetailsService(this.userDetailsService);
     }
 
