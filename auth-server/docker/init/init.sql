@@ -48,7 +48,7 @@ create table oauth_approvals (
 	scope VARCHAR(256),
 	status VARCHAR(10),
 	expiresAt TIMESTAMP,
-	lastModifiedAt TIMESTAMP
+	lastModifiedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 INSERT INTO `oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `autoapprove`)
@@ -58,13 +58,14 @@ INSERT INTO `oauth_client_details` (`client_id`, `resource_ids`, `client_secret`
 VALUES ('app2', 'oauth2-resource', '$2a$10$YTe3FyiJC2oqXz8l2n52iuc5juULH91ivFasLJqcgfI0cUt6Js7u2', 'read', 'authorization_code,password,refresh_token,implicit', null, 'ROLE_CLIENT, ROLE_TRUSTED_CLIENT', 900, null, '{}', null);
 
 
-CREATE TABLE `member` (
-  `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(150) NOT NULL,
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-INSERT INTO `member` (`username`, `password`) VALUES ('member1', '$2a$10$0Bpq4Nwm2zxj9x5ppWZxmuX92cF7f10uT6TNRUumRvvLAuvWL2B4i');
-INSERT INTO `member` (`username`, `password`) VALUES ('member2', '$2a$10$lqseWhdABGjy56Rx6cv3d.oSoP0dYGyjnKP/glLAbn2AyWfDiL8Wi');
+INSERT INTO `user` (`account`, `password`) VALUES ('member1', '$2a$10$0Bpq4Nwm2zxj9x5ppWZxmuX92cF7f10uT6TNRUumRvvLAuvWL2B4i');
+INSERT INTO `user` (`account`, `password`) VALUES ('member2', '$2a$10$lqseWhdABGjy56Rx6cv3d.oSoP0dYGyjnKP/glLAbn2AyWfDiL8Wi');

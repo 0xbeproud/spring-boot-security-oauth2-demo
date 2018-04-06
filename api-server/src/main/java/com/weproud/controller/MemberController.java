@@ -20,6 +20,7 @@ public class MemberController {
     Principal getMembersAll(final Principal principal) {
         log.info("principal: {}", principal);
         log.info("principal.getName(): {}", principal.getName());
+        log.info("-------------------------");
         return principal;
     }
 

@@ -1,6 +1,6 @@
 package com.weproud.domain;
 
-import com.weproud.entity.Member;
+import com.weproud.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,9 +13,9 @@ public class AuthUser implements UserDetails {
     private String username;
     private String password;
 
-    public AuthUser(final Member member) {
-        this.username = member.getUsername();
-        this.password = member.getPassword();
+    public AuthUser(final User user) {
+        this.username = user.getAccount();
+        this.password = user.getPassword();
     }
 
     @Override

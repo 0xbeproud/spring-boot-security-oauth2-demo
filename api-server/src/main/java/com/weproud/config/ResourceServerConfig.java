@@ -49,7 +49,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login", "/login/**").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                // If user isn't authorised to access a path...
+                .exceptionHandling()
+                // ...redirect them to /403
+                .accessDeniedPage("/403");
+        ;
 
     }
 }

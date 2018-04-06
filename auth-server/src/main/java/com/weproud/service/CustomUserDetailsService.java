@@ -1,8 +1,8 @@
 package com.weproud.service;
 
 import com.weproud.domain.AuthUser;
-import com.weproud.entity.Member;
-import com.weproud.repository.MemberRepository;
+import com.weproud.entity.User;
+import com.weproud.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,14 +19,14 @@ import org.springframework.util.ObjectUtils;
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    private MemberRepository memberRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        Member member = this.memberRepository.findByUsername(username);
-        log.info("member: {}", member);
-        if (ObjectUtils.isEmpty(member))
+        User user = this.userRepository.findByAccount(username);
+        log.info("member: {}", user);
+        if (ObjectUtils.isEmpty(user))
             throw new UsernameNotFoundException(username);
-        return new AuthUser(member);
+        return new AuthUser(user);
     }
 }

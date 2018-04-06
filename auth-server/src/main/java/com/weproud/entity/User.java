@@ -16,15 +16,17 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @Entity
-public class Member implements Serializable {
+public class User implements Serializable {
     @Id
     @GeneratedValue
-    private Long id;
-    private String username;
+    private int id;
+    private String account;
     private String password;
+    private String name;
 
-    public Member(final String username, final String password) {
-        this.username = username;
+    public User(final String account, final String password, final String name) {
+        this.account = account;
         this.password = password;
+        this.name = name;
     }
 }
